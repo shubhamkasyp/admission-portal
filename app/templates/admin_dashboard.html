@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Admin Dashboard</h1>
+<h2 class="mb-3">Applications</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>ID Proof</th>
+            <th>Degree Certificate</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for application in applications %}
+        <tr>
+            <td>{{ application.id }}</td>
+            <td>{{ application.name }}</td>
+            <td>{{ application.student.email }}</td>
+            <td>
+                <span class="badge bg-{{ 'success' if application.status == 'approved' else 'warning' }}">
+                    {{ application.status }}
+                </span>
+            </td>
+            <td>
+                <a href="{{ url_for('main.review_application', application_id=application.id) }}" 
+                   class="btn btn-sm btn-primary">
+                    Review
+                </a>
+            </td>
+            <td>
+                {% if application.id_proof_path %}
+                    <a href="{{ url_for('main.view_document', application_id=application.id, document_type='id_proof') }}" 
+                       class="btn btn-sm btn-info" target="_blank">
+                        View ID Proof
+                    </a>
+                {% else %}
+                    <button class="btn btn-sm btn-secondary" disabled>No ID Proof</button>
+                {% endif %}
+            </td>
+            <td>
+                {% if application.degree_certificate_path %}
+                    <a href="{{ url_for('main.view_document', application_id=application.id, document_type='degree_certificate') }}"
+                       class="btn btn-sm btn-info" target="_blank">
+                        View Degree Certificate
+                    </a>
+                {% else %}
+                    <button class="btn btn-sm btn-secondary" disabled>No Certificate</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

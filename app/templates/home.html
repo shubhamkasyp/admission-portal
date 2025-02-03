@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Welcome to Student Admission System</h1>
+<h2 class="mb-3">Application Form</h2>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.email.label(class="form-label") }}
+        {{ form.email(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.password.label(class="form-label") }}
+        {{ form.password(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.confirm_password.label(class="form-label") }}
+        {{ form.confirm_password(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.dob.label(class="form-label") }}
+        {{ form.dob(class="form-control", type="date") }} 
+    </div>
+   
+    <div class="mb-3">
+        {{ form.mobile_number.label(class="form-label") }}  
+        {{ form.mobile_number(class="form-control", type="tel", pattern="[0-9]{10}", placeholder="Enter 10-digit mobile number") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.academic_background.label(class="form-label") }}
+        {{ form.academic_background(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.id_proof.label(class="form-label") }}
+        {{ form.id_proof(class="form-control", accept=".pdf") }} {# ID Proof Upload Field #}
+    </div>
+
+    <div class="mb-3">
+        {{ form.degree_certificate.label(class="form-label") }}
+        {{ form.degree_certificate(class="form-control", accept=".pdf") }} {# Degree Certificate Upload Field #}
+    </div>
+
+    <div>
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}

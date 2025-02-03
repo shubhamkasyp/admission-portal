@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Student Dashboard</h1>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Application Status: <span class="badge bg-primary">{{ application.status }}</span></h2>
+        <p class="card-text"><strong>Name:</strong> {{ application.name }}</p>
+        <p class="card-text"><strong>Date of Birth:</strong> {{ application.dob }}</p>
+        <p class="card-text"><strong>Mobile Number:</strong> {{ application.mobile_number }}</p>
+        <p class="card-text"><strong>Email:</strong> {{ current_user.email }}</p>
+        <p class="card-text"><strong>Academic Background:</strong> {{ application.academic_background }}</p>
+        {% if application.status == 'approved' %}
+            <a href="{{ url_for('main.download_admission_letter') }}" class="btn btn-success">Download Admission Letter</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
